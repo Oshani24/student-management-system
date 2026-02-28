@@ -1,0 +1,93 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #eaf0f6;
+    color: #122d56;
+    font-family: sans-serif;
+}
+
+.landing-header, .landing-footer {
+    background-color: #122d56;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.landing-header {
+    justify-content: flex-start;
+}
+
+.landing-footer {
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+.landing-footer p {
+    margin: 1px 0; 
+    line-height: 1.8; 
+}
+
+.landing-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.header-text h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-text p {
+    margin: 0;
+}
+
+.landing-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.main-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.landing-main h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+.landing-main h2 {
+    font-size: 24px;
+    color: #3f51b5;
+    margin-top: 10px;
+}
+
+.description {
+    max-width: 600px;
+    margin: 20px 0;
+    color: #6d6d6d;
+}
+
+.login-button {
+    background-color: #1a237e;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #3f51b5;
+}
