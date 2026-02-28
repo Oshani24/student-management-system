@@ -1,0 +1,17 @@
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #f4f6f9;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard {
+  flex-grow: 1;
+}
+
