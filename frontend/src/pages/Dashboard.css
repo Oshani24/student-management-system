@@ -1,0 +1,129 @@
+.dashboard {
+  padding: 20px;
+}
+
+.welcome-banner {
+  background: linear-gradient(135deg, #122d56 0%, #2d5a8f 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.welcome-banner h2 {
+  margin: 0 0 10px 0;
+}
+
+.stats-cards {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-info p {
+  margin: 0;
+  color: #888;
+}
+
+.card-info h3 {
+  margin: 5px 0;
+  font-size: 24px;
+}
+
+.card-info span {
+  color: green;
+}
+
+.card-icon {
+  font-size: 28px;
+  padding: 15px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.students-icon {
+  background-color: #3498db;
+}
+
+.courses-icon {
+  background-color: #f39c12;
+}
+
+.enrollment-overview {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enrollment-overview h3 {
+  margin-top: 0;
+}
+
+.enrollment-overview ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.enrollment-overview li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.degree-name {
+  width: 200px;
+}
+
+.progress-bar {
+  flex: 1;
+  background-color: #eee;
+  border-radius: 5px;
+  height: 10px;
+  margin: 0 70px;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.progress.se {
+  background-color: #2c3e50;
+}
+
+.progress.cs {
+  background-color: #f39c12;
+}
+
+.progress.it {
+  background-color: #3498db;
+}
+
+.progress.is {
+  background-color: #e74c3c;
+}
+
+.student-count {
+  font-weight: bold;
+}
