@@ -1,0 +1,279 @@
+.add-student-container {
+  padding: 20px;
+  background-color: #f4f6f9;
+}
+
+.add-student-header {
+  color: #122d56;
+  margin-bottom: 20px;
+}
+
+.add-student-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.add-student-header p {
+  margin: 5px 0 0 0;
+  color: #6d6d6d;
+}
+
+.form-section {
+  background-color: white;
+  color: #122d56;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.form-section h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  flex-basis: 100%;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-group input[placeholder="Enter full address"] {
+  height: 50px; /* You can adjust this value as needed */
+}
+
+
+.enrolled-course-input {
+    display: flex;
+    gap: 20px;
+}
+
+.enrolled-course-input select {
+    flex-grow: 1;
+}
+
+.enrolled-course select {
+  flex-grow: 1;
+  background-color: #f0f0f7;
+  border: 1px solid #dcdcf0;
+}
+
+.add-course-btn {
+  background-color: #1a237e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.reset-btn,
+.register-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.reset-btn {
+  background-color: #ccc;
+}
+
+.reset-btn:hover {
+  background-color: #efbe1d;
+}
+.register-btn {
+  background-color: #1a237e;
+  color: white;
+}
+
+.placeholder-select {
+    color: #6d6d6d; /* Light gray placeholder color */
+}
+
+.placeholder-select:focus,
+.placeholder-select:not([value=""]) {
+    color: #6d6d6d; /* Normal text color when focused or a value is selected */
+}
+
+/* Course Search Styles */
+.course-search-container {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.course-search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #374151;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.course-search-input:focus {
+  border-color: #1a237e;
+  box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+}
+
+.course-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #f9fafb;
+}
+
+.search-result-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-result-item .course-code {
+  font-weight: bold;
+  margin: 0 0 4px 0;
+  color: #122d56;
+  font-size: 14px;
+}
+
+.search-result-item .course-name {
+  margin: 0;
+  color: #6d6d6d;
+  font-size: 13px;
+}
+
+.no-results {
+  padding: 20px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* Selected Courses List */
+.selected-courses-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selected-course-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 10px 12px;
+  transition: background-color 0.2s ease;
+}
+
+.selected-course-item:hover {
+  background-color: #f1f3f5;
+}
+
+.selected-course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.selected-course-code {
+  font-weight: bold;
+  color: #122d56;
+  font-size: 14px;
+}
+
+.selected-course-name {
+  color: #6d6d6d;
+  font-size: 13px;
+}
+
+.delete-selected-course-btn {
+  background: none;
+  border: none;
+  color: #122d56;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.delete-selected-course-btn:hover {
+  background-color: #efbe1d;
+}
+
+.delete-selected-course-btn:active {
+  transform: scale(0.95);
+}

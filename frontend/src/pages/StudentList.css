@@ -1,0 +1,102 @@
+.student-list-container {
+    padding: 20px;
+    background-color: #f4f6f9;
+    color: #122d56;
+}
+
+.student-list-header {
+    margin-bottom: 20px;
+}
+
+.student-list-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.student-list-header p {
+    margin: 5px 0 0 0;
+    color: #6d6d6d;
+}
+
+.student-list-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.card-title h3 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.search-info {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-info strong {
+    color: #1976d2;
+}
+
+.clear-search {
+    background-color: #122d56;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: auto;
+    transition: background-color 0.3s;
+}
+
+.clear-search:hover {
+    background-color: #1a3a6e;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6d6d6d;
+    font-size: 16px;
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.student-table th, .student-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.student-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.action-icons {
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.action-icons a {
+  color: inherit;      
+  text-decoration: none; 
+}
+
+.action-icons a:hover {
+  color: #6d6d6d; 
+}
