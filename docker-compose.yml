@@ -1,0 +1,162 @@
+version: '3.8'
+
+services:
+  # Database
+  mysql:
+    image: mysql:8.0
+    container_name: sms-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root1234}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/init-db:/docker-entrypoint-initdb.d
+    networks:
+      - sms-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-root1234}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # Backend Services
+  api-gateway:
+    build: ./backend/api-gateway
+    container_name: sms-api-gateway
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-sms_secret_key_2026}
+      - AUTH_SERVICE_URL=http://auth-service:5001
+      - STUDENT_SERVICE_URL=http://student-service:5002
+      - COURSE_SERVICE_URL=http://course-service:5003
+      - ENROLLMENT_SERVICE_URL=http://enrollment-service:5004
+      - AUDIT_SERVICE_URL=http://audit-service:5005
+    networks:
+      - sms-network
+    depends_on:
+      - auth-service
+      - student-service
+      - course-service
+      - enrollment-service
+      - audit-service
+
+  auth-service:
+    build: ./backend/auth-service
+    container_name: sms-auth-service
+    restart: always
+    ports:
+      - "5001:5001"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_NAME=sms_auth
+      - JWT_SECRET=${JWT_SECRET:-sms_secret_key_2026}
+      - AUDIT_SERVICE_URL=http://audit-service:5005
+    networks:
+      - sms-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  student-service:
+    build: ./backend/student-service
+    container_name: sms-student-service
+    restart: always
+    ports:
+      - "5002:5002"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_NAME=sms_students
+      - INTAKE_YEAR=${INTAKE_YEAR:-26}
+      - AUDIT_SERVICE_URL=http://audit-service:5005
+    networks:
+      - sms-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  course-service:
+    build: ./backend/course-service
+    container_name: sms-course-service
+    restart: always
+    ports:
+      - "5003:5003"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_NAME=sms_courses
+      - AUDIT_SERVICE_URL=http://audit-service:5005
+    networks:
+      - sms-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  enrollment-service:
+    build: ./backend/enrollment-service
+    container_name: sms-enrollment-service
+    restart: always
+    ports:
+      - "5004:5004"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_NAME=sms_enrollments
+      - AUDIT_SERVICE_URL=http://audit-service:5005
+    networks:
+      - sms-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  audit-service:
+    build: ./backend/audit-service
+    container_name: sms-audit-service
+    restart: always
+    ports:
+      - "5005:5005"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_NAME=sms_audit
+    networks:
+      - sms-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # Frontend
+  frontend:
+    build: ./frontend
+    container_name: sms-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    networks:
+      - sms-network
+    depends_on:
+      - api-gateway
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+
+volumes:
+  mysql_data:
+
+networks:
+  sms-network:
+    driver: bridge
