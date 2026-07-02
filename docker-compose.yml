@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Database
   mysql:
@@ -7,7 +5,7 @@ services:
     container_name: sms-mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root1234}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
       - "3307:3306"
     volumes:
@@ -16,7 +14,7 @@ services:
     networks:
       - sms-network
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-root1234}" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -29,7 +27,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - JWT_SECRET=${JWT_SECRET:-sms_secret_key_2026}
+      - JWT_SECRET=${JWT_SECRET}
       - AUTH_SERVICE_URL=http://auth-service:5001
       - STUDENT_SERVICE_URL=http://student-service:5002
       - COURSE_SERVICE_URL=http://course-service:5003
@@ -54,9 +52,11 @@ services:
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_PASSWORD=${DB_ROOT_PASSWORD}
       - DB_NAME=sms_auth
-      - JWT_SECRET=${JWT_SECRET:-sms_secret_key_2026}
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - AUDIT_SERVICE_URL=http://audit-service:5005
     networks:
       - sms-network
@@ -74,10 +74,11 @@ services:
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_PASSWORD=${DB_ROOT_PASSWORD}
       - DB_NAME=sms_students
-      - INTAKE_YEAR=${INTAKE_YEAR:-26}
+      - INTAKE_YEAR=${INTAKE_YEAR}
       - AUDIT_SERVICE_URL=http://audit-service:5005
+      - ENROLLMENT_SERVICE_URL=http://enrollment-service:5004
     networks:
       - sms-network
     depends_on:
@@ -94,7 +95,7 @@ services:
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_PASSWORD=${DB_ROOT_PASSWORD}
       - DB_NAME=sms_courses
       - AUDIT_SERVICE_URL=http://audit-service:5005
     networks:
@@ -113,7 +114,7 @@ services:
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_PASSWORD=${DB_ROOT_PASSWORD}
       - DB_NAME=sms_enrollments
       - AUDIT_SERVICE_URL=http://audit-service:5005
     networks:
@@ -132,7 +133,7 @@ services:
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=${DB_ROOT_PASSWORD:-root1234}
+      - DB_PASSWORD=${DB_ROOT_PASSWORD}
       - DB_NAME=sms_audit
     networks:
       - sms-network

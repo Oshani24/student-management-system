@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS admin (
 );
 
 -- Admin will be seeded by auth-service at first startup with a properly bcrypt-hashed password
--- Default credentials: username=admin, password=Admin@1234
+-- Credentials are loaded from environment variables
 
 -- ==============================================
 -- Student Database
@@ -31,10 +31,10 @@ CREATE TABLE IF NOT EXISTS student (
   student_number VARCHAR(20) NOT NULL UNIQUE,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
-  email VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
   phone VARCHAR(20) NOT NULL,
   address TEXT NOT NULL,
-  nic VARCHAR(20),
+  nic VARCHAR(20) UNIQUE,
   date_of_birth DATE,
   degree_program ENUM('Software Engineering','Computer Science','Information System','Information Technology') NOT NULL,
   academic_year VARCHAR(20),
@@ -70,25 +70,7 @@ CREATE TABLE IF NOT EXISTS course (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Seed initial courses
-INSERT INTO course (code, name, credits) VALUES
-  ('CS101', 'Introduction to Programming', 3),
-  ('CS102', 'Computer Architecture', 3),
-  ('CS103', 'Discrete Mathematics', 3),
-  ('CS201', 'Data Structures', 3),
-  ('CS202', 'Database Systems', 3),
-  ('CS203', 'Web Development', 3),
-  ('CS301', 'Linear Algebra', 3),
-  ('CS302', 'Algorithms', 3),
-  ('CS303', 'Operating Systems', 3),
-  ('CS401', 'Software Engineering', 3),
-  ('CS402', 'Artificial Intelligence', 3),
-  ('CS403', 'Computer Networks', 3),
-  ('MATH101', 'Calculus I', 4),
-  ('MATH201', 'Statistics', 3),
-  ('ENG101', 'Technical Writing', 2),
-  ('PHYS101', 'Physics I', 4)
-ON DUPLICATE KEY UPDATE code = code;
+-- No default courses - admin can add courses as needed
 
 -- ==============================================
 -- Enrollment Database

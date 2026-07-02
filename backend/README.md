@@ -27,10 +27,7 @@ Auto-generated on student registration based on degree program:
 
 ## Default Admin Credentials
 
-| Field | Value |
-|-------|-------|
-| Username | `admin` |
-| Password | `Admin@1234` |
+Admin credentials are loaded from environment variables. Set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in your `.env` file.
 
 ## Quick Start (Docker — Recommended)
 
@@ -98,11 +95,13 @@ cd backend/api-gateway && npm install && npm start
 
 ### Environment Variables
 
-Copy `.env.example` to `.env` in the backend root and adjust if needed:
+Copy the root [`.env.example`](../.env.example) to `.env` and adjust if needed:
 
 ```env
-DB_ROOT_PASSWORD=root1234
-JWT_SECRET=sms_secret_key_2026
+DB_ROOT_PASSWORD=your_db_root_password
+JWT_SECRET=your_jwt_secret
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
 INTAKE_YEAR=26
 ```
 
@@ -113,9 +112,11 @@ create a `.env` file in each service directory:
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
-DB_PASSWORD=root1234
+DB_PASSWORD=your_db_root_password
 DB_NAME=sms_auth       # (or sms_students / sms_courses / etc.)
-JWT_SECRET=sms_secret_key_2026
+JWT_SECRET=your_jwt_secret
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
 AUDIT_SERVICE_URL=http://localhost:5005
 INTAKE_YEAR=26
 ```
@@ -165,3 +166,92 @@ All routes go through the **API Gateway** at `http://localhost:5000`.
 |--------|------|-------------|
 | GET | `/api/audit` | List logs (with filters) |
 | POST | `/api/audit` | Create log entry (internal) |
+
+## Demo Artifact (Submission + Viva)
+
+This section is the official demo artifact for the project. It defines the exact live demo flow, expected outcomes, and evidence to show for each marking criterion.
+
+### Demo Environment
+
+- Date: 15 March 2026
+- App URL: http://localhost:3000
+- API Gateway URL: http://localhost:5000
+- Default login: set via `ADMIN_USERNAME` and `ADMIN_PASSWORD`
+- Stack: React frontend, Node.js microservices backend, MySQL, Docker Compose
+
+### Demo Objectives
+
+- Prove all required functionality works end-to-end.
+- Prove architecture, maintainability, and testing requirements are met.
+- Provide concrete evidence for the marking schema.
+
+### Live Demo Script (Recommended Order)
+
+1. Start services
+- Run: `cd backend && docker-compose up --build`
+- Then run frontend: `cd ../frontend && npm install && npm start`
+- Show all service containers are running.
+
+2. Login and dashboard
+- Login with default admin credentials.
+- Show dashboard statistics load correctly.
+
+3. Student registration + ID generation
+- Register a new student (all required fields).
+- Show generated student number format (example: BSE/26/0001).
+- Register another student in the same degree and show sequence increment.
+- Register one in a different degree and show separate sequence.
+
+4. Course registration and enrollment
+- Create a new course.
+- Enroll a student in one or more courses.
+- Show enrollment appears in student details.
+
+5. Search and retrieve
+- Search by student number and by name.
+- Open student details and show full profile + current enrollments + course history.
+
+6. Update management
+- Edit student details and save.
+- Edit course details and save.
+- Confirm updated values appear in UI.
+
+7. Delete operations
+- Delete one enrollment.
+- Delete a course and show related enrollment cleanup.
+- Delete a student and show student removal from list.
+
+8. Audit trail evidence
+- Open audit logs page.
+- Filter by action type (Create, Update, Delete, Login).
+- Filter by date range.
+- Show entries contain entity id/name, action type, performer, timestamp.
+
+9. Maintainability evidence
+- Open environment variable settings (`.env` / compose env values).
+- Explain that DB credentials and service URLs are externalized.
+- State that credential changes require config update only, not code changes.
+
+10. Testing evidence
+- Run: `cd frontend && npm test -- --coverage --watchAll=false --ci`
+- Show coverage report is above 20% threshold.
+
+### Evidence Mapping to Marking Schema
+
+- Registration: student + course creation flows demonstrated.
+- ID Generation: atomic unique student number generation demonstrated.
+- Course/Student Management: update operations demonstrated.
+- Search/Retrieve: search and full student details demonstrated.
+- Delete: student/course/enrollment deletion demonstrated.
+- Audit Trail: filtered logs and full activity tracking demonstrated.
+- Design Patterns: API Gateway, Proxy, Singleton, Factory, Interceptor patterns explained.
+- Standards: validation, parameterized SQL, bcrypt, JWT, HTTP status codes explained.
+- Maintainability: env-driven configuration and Dockerized deployment explained.
+- Unit Testing: test suite and coverage report demonstrated.
+- Architecture: microservices + Docker Compose + service boundaries explained.
+- Documentation & Demo: this artifact plus README setup instructions provided.
+
+### Notes
+
+- This demo artifact is documentation-only and does not modify runtime code or system behavior.
+- It is safe to include in submission and use as the viva walkthrough script.

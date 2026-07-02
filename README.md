@@ -168,8 +168,8 @@ npm start
 
 | Field | Value |
 |-------|-------|
-| **Username** | `admin` |
-| **Password** | `Admin@1234` |
+| **Username** | from `ADMIN_USERNAME` |
+| **Password** | from `ADMIN_PASSWORD` |
 
 ## 📁 Project Structure
 
